@@ -1,0 +1,154 @@
+/* ==========================================================
+   SOFT CLINICAL — Motion layer
+   Personality: gentle, organic, "breathing" — slower, softer
+   easing than a clinical/mechanical feel. Warm glow instead of
+   sharp pulses, floaty bounce instead of snappy scale.
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ---------- 1. Staggered load-in — soft "melt" upward ---------- */
+/* Slower and slightly larger travel distance than a clinical reveal,
+   with a gentle overshoot (ease-out-back) instead of a crisp linear-ish
+   deceleration, so elements feel like they settle rather than snap in. */
+@keyframes sc-melt-in{
+  from{ opacity:0; transform:translateY(16px) scale(.98); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+.sc-reveal{
+  opacity:0;
+  animation:sc-melt-in .7s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay:var(--sc-delay, 0ms);
+}
+
+/* ---------- 2. Tap / press feedback — soft squish ---------- */
+.sc-card,
+.sc-ward-card,
+.sc-quick-item .ic,
+.sc-stat,
+.sc-btn,
+.sc-segment button,
+.sc-tablist button,
+.icon-btn,
+.sc-navitem{
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, background-color .3s ease;
+}
+.sc-card:active,
+.sc-ward-card:active{ transform:scale(.97); }
+.sc-quick-item:active .ic{ transform:scale(.88) rotate(-2deg); }
+.sc-stat:active{ transform:scale(.95); }
+.sc-btn:active{ transform:scale(.96); }
+.icon-btn:active{ transform:scale(.88); }
+.sc-navitem:active{ transform:scale(.9); }
+.sc-navitem:active .fab{ transform:scale(.92); }
+
+/* ---------- 3. Segment toggle — soft color morph ---------- */
+/* This design's segment buttons are two independent gapped pills (not a
+   padded single track), so instead of an overlay thumb we cross-fade the
+   fill/border/text color and give the newly-active pill a gentle "settle"
+   scale bounce — same organic feel, without needing an absolute overlay
+   that would otherwise sit on top of the sibling button. */
+.sc-segment button{
+  transition:background-color .4s cubic-bezier(.16,1,.3,1),
+             border-color .4s cubic-bezier(.16,1,.3,1),
+             color .4s cubic-bezier(.16,1,.3,1),
+             transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.sc-segment button.active{ animation:sc-segment-settle .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes sc-segment-settle{
+  0%{ transform:scale(.94); }
+  60%{ transform:scale(1.03); }
+  100%{ transform:scale(1); }
+}
+
+/* ---------- 3b. Patient-profile tab switch (السجل الطبي / الجلسات / المرفقات) */
+/* Distinct from the segment: a livelier "pop" bounce on the newly active
+   pill, plus the content below it soft-fades/slides in on every switch,
+   so choosing a tab visibly refreshes what's underneath. */
+.sc-tablist button{
+  transition:background-color .35s cubic-bezier(.16,1,.3,1),
+             color .35s cubic-bezier(.16,1,.3,1),
+             transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.sc-tablist button.active{ animation:sc-tab-pop .45s cubic-bezier(.34,1.56,.64,1); }
+@keyframes sc-tab-pop{
+  0%{ transform:scale(.9) translateY(2px); }
+  55%{ transform:scale(1.06) translateY(-1px); }
+  100%{ transform:scale(1) translateY(0); }
+}
+
+@keyframes sc-panel-swap-in{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.sc-panel.is-swapping{
+  animation:sc-panel-swap-in .45s cubic-bezier(.16,1,.3,1);
+}
+
+/* ---------- 4. Bottom nav: floaty bounce + FAB warm glow ---------- */
+.sc-navitem svg{ transition:transform .45s cubic-bezier(.34,1.56,.64,1); }
+.sc-navitem.active svg{ transform:translateY(-3px) scale(1.12) rotate(-4deg); }
+
+.sc-navitem .fab{ position:relative; animation:sc-fab-float 3.2s ease-in-out infinite; }
+.sc-navitem .fab::after{
+  content:"";
+  position:absolute; inset:-8px;
+  border-radius:inherit;
+  background:radial-gradient(circle, var(--sc-terracotta) 0%, transparent 70%);
+  opacity:.35;
+  animation:sc-fab-glow 3.2s ease-in-out infinite;
+  z-index:-1;
+}
+@keyframes sc-fab-float{
+  0%, 100%{ transform:translateY(0); }
+  50%{ transform:translateY(-3px); }
+}
+@keyframes sc-fab-glow{
+  0%, 100%{ opacity:.25; transform:scale(1); }
+  50%{ opacity:.5; transform:scale(1.15); }
+}
+
+/* ---------- 5. Warm breathing glow on badges (instead of hard pulse) --- */
+.sc-badge.confirmed,
+.sc-badge.pending,
+.sc-badge.session{
+  animation:sc-badge-breathe 3s ease-in-out infinite;
+}
+@keyframes sc-badge-breathe{
+  0%, 100%{ box-shadow:0 0 0 0 rgba(0,0,0,0); }
+  50%{ box-shadow:0 0 0 4px rgba(0,0,0,.03); }
+}
+.sc-badge.confirmed::before,
+.sc-badge.pending::before,
+.sc-badge.session::before{
+  content:"";
+  display:inline-block;
+  width:5px; height:5px; border-radius:50%;
+  background:currentColor;
+  margin-inline-end:2px;
+  animation:sc-dot-breathe 3s ease-in-out infinite;
+}
+@keyframes sc-dot-breathe{
+  0%, 100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.5; transform:scale(1.3); }
+}
+
+/* ---------- 6. Topbar gentle settle on scroll ---------- */
+.sc-topbar{ transition:padding .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease, border-radius .4s ease; }
+.sc-topbar.is-condensed{
+  padding-top:4px;
+  padding-bottom:12px;
+  box-shadow:0 10px 24px -18px rgba(61,50,41,.3);
+}
+.sc-topbar.is-condensed .sc-topbar-row{ margin-bottom:10px; }
+.sc-topbar.is-condensed .greeting{ font-size:16px; }
+.sc-topbar.is-condensed .sc-avatar{ width:36px; height:36px; font-size:13px; }
+
+.sc-profile-hero{ transition:padding .4s ease; }

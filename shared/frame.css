@@ -94,6 +94,30 @@ body.showcase-body{
   font-weight:700;
 }
 
+/* Hamburger trigger — hidden by default, only shown below the small-screen
+   breakpoint where the tabs collapse into a dropdown menu instead. */
+.showcase-menu-btn{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid var(--showcase-line);
+  background:transparent;
+  color:var(--showcase-ink);
+  cursor:pointer;
+  flex-shrink:0;
+  padding:0;
+}
+.showcase-menu-btn svg{ width:18px; height:18px; }
+.showcase-menu-btn:hover{ background:var(--showcase-tab-hover, rgba(0,0,0,.04)); }
+.showcase-menu-btn.active{
+  background:var(--showcase-accent-soft, rgba(79,140,255,.14));
+  border-color:var(--showcase-accent-line, rgba(79,140,255,.4));
+  color:var(--showcase-accent-ink, var(--showcase-accent));
+}
+
 /* ---------- Phone frame gallery ---------- */
 .phone-gallery{
   max-width:1200px;
@@ -190,16 +214,43 @@ html.design-page .phone-frame{
 }
 
 /* ---------- Navbar responsiveness ---------- */
-@media (max-width:900px){
-  .showcase-nav{ padding:9px 14px; gap:8px; }
-  .showcase-nav .brand .brand-text{ display:none; }
-  .showcase-tabs{ justify-content:flex-start; }
-  .showcase-tabs a{ padding:6px 10px; font-size:11.5px; }
-}
 
-@media (max-width:480px){
-  .showcase-nav{ padding:8px 10px; gap:6px; }
-  .showcase-tabs a{ padding:5px 9px; font-size:11px; }
+/* Below this breakpoint: the well-known hamburger + dropdown pattern.
+   Tabs stop being an inline row and become a collapsible panel under
+   the navbar, toggled by the hamburger button (see navbar.js for the
+   open/close logic). The brand text stays visible at every width. */
+@media (max-width:767px){
+  .showcase-nav{ padding:9px 12px; gap:8px; flex-wrap:wrap; position:relative; }
+  .showcase-menu-btn{ display:flex; order:2; }
+  .showcase-tabs{
+    order:3;
+    flex-basis:100%;
+    display:none;
+    flex-direction:column;
+    gap:2px;
+    justify-content:flex-start;
+    overflow:visible;
+    max-height:none;
+  }
+  .showcase-tabs.open{
+    display:flex;
+    position:absolute;
+    top:100%;
+    right:0;
+    left:0;
+    padding:8px 12px 12px;
+    background:var(--showcase-nav-bg);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--showcase-line);
+    box-shadow:0 12px 24px -12px rgba(0,0,0,.25);
+  }
+  .showcase-tabs.open a{
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:13px;
+    text-align:right;
+    width:100%;
+  }
 
   .phone-frame{ width:320px; border-radius:38px; }
   html.design-page .phone-frame{ height:min(692px, calc(100vh - var(--nav-h, 50px) - 56px)); }

@@ -1,0 +1,136 @@
+/* ==========================================================
+   STRUCTURED DATA ENTERPRISE — Motion layer
+   Personality: functional, data-grid. No bounce, no glow —
+   motion reads like a spreadsheet/dashboard populating: fast
+   linear-ish easing, row-by-row sequential reveal, numeric
+   count-up on stat figures, and a live-tick blink on synced
+   rows instead of a decorative pulse.
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ---------- 1. Staggered load-in — fast row-populate ---------- */
+/* Table rows and cards slide in from the inline-start edge (like a grid
+   populating column by column) rather than rising from below — a small
+   but distinct read from the other designs' vertical rise-ins. */
+@keyframes se-row-in{
+  from{ opacity:0; transform:translateX(var(--se-slide-from, 10px)); }
+  to{ opacity:1; transform:translateX(0); }
+}
+.se-reveal{
+  opacity:0;
+  animation:se-row-in .32s cubic-bezier(.4,0,.2,1) forwards;
+  animation-delay:var(--se-delay, 0ms);
+}
+[dir="rtl"] .se-reveal{ --se-slide-from:-10px; }
+
+/* ---------- 2. Tap / press feedback — snappy, no overshoot ---------- */
+.se-row,
+.se-ward-row,
+.se-quick-item,
+.se-stat,
+.se-btn,
+.se-segment button,
+.se-tablist button,
+.icon-btn,
+.se-navitem{
+  transition:background-color .12s ease, box-shadow .12s ease, transform .1s ease, border-color .12s ease;
+}
+.se-row:active,
+.se-ward-row:active{ background:var(--se-accent-soft) !important; }
+.se-quick-item:active{ transform:scale(.96); border-color:var(--se-accent-soft-line); }
+.se-stat:active{ background:var(--se-surface); }
+.se-btn:active{ transform:scale(.98); }
+.icon-btn:active{ transform:scale(.92); }
+.se-navitem:active{ opacity:.6; }
+.se-navitem:active .fab{ transform:scale(.94); }
+
+/* ---------- 3. Sliding thumb for segment toggle — hard-edged snap ---------- */
+.se-segment{ position:relative; }
+.se-segment .se-segment-thumb{
+  position:absolute;
+  top:3px; bottom:3px;
+  width:calc(50% - 3px);
+  background:var(--se-accent-deep);
+  border-radius:6px;
+  transition:transform .22s cubic-bezier(.4,0,.2,1);
+  z-index:0;
+  pointer-events:none;
+}
+.se-segment button{ position:relative; z-index:1; }
+.se-segment button.active{ background:transparent; }
+
+/* ---------- 3b. Patient-profile tabs — real panel swap, grid-populate ---------- */
+.se-tablist button .count{ transition:color .15s ease; }
+@keyframes se-panel-populate{
+  from{ opacity:0; transform:translateY(4px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.se-panel.is-swapping > *{
+  animation:se-panel-populate .28s cubic-bezier(.4,0,.2,1) backwards;
+}
+.se-panel.is-swapping > *:nth-child(1){ animation-delay:0ms; }
+.se-panel.is-swapping > *:nth-child(2){ animation-delay:35ms; }
+.se-panel.is-swapping > *:nth-child(3){ animation-delay:70ms; }
+.se-panel.is-swapping > *:nth-child(4){ animation-delay:105ms; }
+.se-panel.is-swapping > *:nth-child(n+5){ animation-delay:140ms; }
+/* Table rows inside a swapping panel populate individually too. */
+.se-panel.is-swapping .se-row{ animation:se-panel-populate .24s cubic-bezier(.4,0,.2,1) backwards; }
+.se-panel.is-swapping .se-row:nth-child(2){ animation-delay:40ms; }
+.se-panel.is-swapping .se-row:nth-child(3){ animation-delay:80ms; }
+.se-panel.is-swapping .se-row:nth-child(4){ animation-delay:120ms; }
+
+/* ---------- 4. Bottom nav + FAB — minimal, functional ---------- */
+.se-navitem svg{ transition:transform .15s ease; }
+.se-navitem.active svg{ transform:translateY(-1px); }
+.se-navitem .fab{ transition:box-shadow .3s ease; }
+.se-navitem .fab::after{
+  content:"";
+  position:absolute; inset:-4px;
+  border-radius:inherit;
+  border:1.5px solid var(--se-accent-deep);
+  opacity:0;
+  animation:se-fab-tick 3s steps(1) infinite;
+}
+.se-navitem .fab{ position:relative; }
+@keyframes se-fab-tick{
+  0%, 92%{ opacity:0; transform:scale(1); }
+  94%{ opacity:.5; transform:scale(1.08); }
+  100%{ opacity:0; transform:scale(1.12); }
+}
+
+/* ---------- 5. "Live" tick blink on synced rows/badges ---------- */
+.se-row.is-live .time .tick{
+  animation:se-tick-blink 1.6s steps(1, jump-none) infinite;
+}
+@keyframes se-tick-blink{
+  0%, 49%{ opacity:1; box-shadow:0 0 0 2px var(--se-mint-soft); }
+  50%, 100%{ opacity:.3; box-shadow:none; }
+}
+.se-sync-strip .live-dot{
+  animation:se-tick-blink 1.6s steps(1, jump-none) infinite;
+}
+
+/* ---------- 6. Topbar shrink on scroll — table sticky-header feel ---------- */
+.se-topbar{ transition:padding .18s ease, box-shadow .18s ease; }
+.se-topbar.is-condensed{
+  padding-top:4px;
+  padding-bottom:8px;
+  box-shadow:0 2px 8px -4px rgba(26,31,41,.15);
+}
+.se-topbar.is-condensed .se-topbar-row{ margin-bottom:6px; }
+.se-topbar.is-condensed .greeting{ font-size:14.5px; }
+.se-topbar.is-condensed .se-avatar{ width:28px; height:28px; font-size:11px; }
+.se-topbar.is-condensed .se-sync-strip{ display:none; }
+
+/* Stat-card numeric count-up: applied via JS by animating a custom
+   property that a ::before overlay eases past — kept subtle since these
+   are dashboard figures, not celebratory numbers. */
+.se-stat .num{ transition:opacity .2s ease; }

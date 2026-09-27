@@ -1,0 +1,144 @@
+/* ==========================================================
+   DARK CLINICAL PRO — Motion layer
+   Personality: technical, glowing, "night monitor" feel. Sharp,
+   fast easing (not bouncy), cyan/mint glow trails instead of
+   warm pulses, and a subtle radar-style scan sweep on load.
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ---------- 1. Staggered load-in — fast rise + glow flash ---------- */
+/* Quicker than the other two designs (tech feel = snappy), each element
+   briefly flashes its border in the accent glow as it locks into place,
+   like a monitoring panel powering up its widgets one by one. */
+@keyframes dp-power-on{
+  0%{ opacity:0; transform:translateY(8px); }
+  60%{ opacity:1; transform:translateY(0); }
+  100%{ opacity:1; transform:translateY(0); }
+}
+@keyframes dp-glow-flash{
+  0%{ box-shadow:0 0 0 0 rgba(62,166,255,0); }
+  35%{ box-shadow:0 0 0 1px var(--dp-accent-soft-line), 0 0 16px -2px var(--dp-accent); }
+  100%{ box-shadow:0 0 0 0 rgba(62,166,255,0); }
+}
+.dp-reveal{
+  opacity:0;
+  animation:dp-power-on .38s cubic-bezier(.2,.8,.2,1) forwards,
+            dp-glow-flash .7s ease-out forwards;
+  animation-delay:var(--dp-delay, 0ms);
+}
+
+/* ---------- 2. Tap / press feedback — sharp, immediate ---------- */
+.dp-card,
+.dp-ward-card,
+.dp-quick-item .ic,
+.dp-stat,
+.dp-btn,
+.dp-segment button,
+.dp-tablist button,
+.icon-btn,
+.dp-navitem{
+  transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease, border-color .12s ease;
+}
+.dp-card:active,
+.dp-ward-card:active{ transform:scale(.985); box-shadow:0 0 0 1px var(--dp-accent-soft-line); }
+.dp-quick-item:active .ic{ transform:scale(.9); box-shadow:0 0 0 1px var(--dp-accent-soft-line), 0 0 12px -2px var(--dp-accent); }
+.dp-stat:active{ transform:scale(.97); }
+.dp-btn:active{ transform:scale(.97); }
+.icon-btn:active{ transform:scale(.88); }
+.dp-navitem:active{ transform:scale(.92); }
+.dp-navitem:active .fab{ transform:scale(.94); }
+
+/* ---------- 3. Sliding thumb for segment toggle — sharp glide + glow --- */
+.dp-segment{ position:relative; }
+.dp-segment .dp-segment-thumb{
+  position:absolute;
+  top:5px; bottom:5px;
+  width:calc(50% - 8px);
+  background:var(--dp-accent-soft);
+  border:1px solid var(--dp-accent-soft-line);
+  border-radius:9px;
+  box-shadow:0 0 14px -4px var(--dp-accent);
+  transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  z-index:0;
+  pointer-events:none;
+}
+.dp-segment button{ position:relative; z-index:1; }
+.dp-segment button.active{ background:transparent; box-shadow:none; }
+
+/* ---------- 3b. Patient-profile tabs — sliding underline ---------- */
+.dp-tablist{ position:relative; }
+.dp-tablist .dp-tab-underline{
+  position:absolute;
+  bottom:-1px;
+  height:2.5px;
+  background:var(--dp-accent);
+  box-shadow:0 0 8px 0 var(--dp-accent);
+  border-radius:2px 2px 0 0;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), width .3s cubic-bezier(.2,.8,.2,1);
+  z-index:1;
+}
+.dp-tablist button{ border-bottom-color:transparent !important; }
+.dp-tablist button.active{ color:var(--dp-accent); }
+
+@keyframes dp-panel-scan-in{
+  from{ opacity:0; transform:translateY(6px); filter:brightness(1.4); }
+  to{ opacity:1; transform:translateY(0); filter:brightness(1); }
+}
+.dp-panel.is-swapping{ animation:dp-panel-scan-in .3s ease-out; }
+
+/* ---------- 4. Bottom nav: active glow ring + FAB radar pulse ---------- */
+.dp-navitem svg{ transition:transform .2s cubic-bezier(.2,.8,.2,1), filter .2s ease; }
+.dp-navitem.active svg{ transform:translateY(-1px); filter:drop-shadow(0 0 6px var(--dp-accent)); }
+
+.dp-navitem .fab{ position:relative; }
+.dp-navitem .fab::after,
+.dp-navitem .fab::before{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:inherit;
+  border:1.5px solid var(--dp-accent);
+  opacity:0;
+}
+.dp-navitem .fab::after{ animation:dp-radar-ping 2.6s cubic-bezier(.2,.8,.2,1) infinite; }
+.dp-navitem .fab::before{ animation:dp-radar-ping 2.6s cubic-bezier(.2,.8,.2,1) infinite 1.3s; }
+@keyframes dp-radar-ping{
+  0%{ transform:scale(.9); opacity:.7; }
+  100%{ transform:scale(1.6); opacity:0; }
+}
+
+/* ---------- 5. "Live" telemetry pulse on badges ---------- */
+.dp-badge.confirmed::before,
+.dp-badge.pending::before,
+.dp-badge.session::before{
+  content:"";
+  display:inline-block;
+  width:5px; height:5px; border-radius:50%;
+  background:currentColor;
+  margin-inline-end:2px;
+  box-shadow:0 0 4px 0 currentColor;
+  animation:dp-telemetry-blink 1.4s steps(2, jump-none) infinite;
+}
+@keyframes dp-telemetry-blink{
+  0%, 49%{ opacity:1; }
+  50%, 100%{ opacity:.25; }
+}
+
+/* ---------- 6. Topbar shrink on scroll — HUD-like condense ---------- */
+.dp-topbar{ transition:padding .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.dp-topbar.is-condensed{
+  padding-top:4px;
+  padding-bottom:10px;
+  box-shadow:0 4px 20px -10px rgba(62,166,255,.25);
+  border-color:var(--dp-accent-soft-line);
+}
+.dp-topbar.is-condensed .dp-topbar-row{ margin-bottom:8px; }
+.dp-topbar.is-condensed .greeting{ font-size:16px; }
+.dp-topbar.is-condensed .dp-avatar{ width:34px; height:34px; font-size:13px; }

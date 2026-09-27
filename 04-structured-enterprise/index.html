@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4 · Structured Data Enterprise — عيادة Design Lab</title>
+<title>5 · Structured Data Enterprise — عيادة Design Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared/frame.css">
 <link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="animations.css">
 </head>
 <body class="showcase-body">
 
@@ -32,38 +33,43 @@
           </div>
         </div>
         <div class="se-content">
+          <div class="se-sync-strip">
+            <span class="live-dot"></span><span>مباشر · مزامنة قبل 12 ثانية</span>
+            <span class="occupancy"><span>إشغال 76%</span><span class="bar"><span style="width:76%;"></span></span></span>
+          </div>
           <div class="se-segment">
             <button class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>خارجية</button>
             <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>داخلية</button>
           </div>
           <div class="se-stats">
-            <div class="se-stat"><div class="num">12</div><div class="lbl">جلسات اليوم</div></div>
-            <div class="se-stat up"><div class="num">8</div><div class="lbl">مكتملة</div></div>
-            <div class="se-stat warn"><div class="num">4</div><div class="lbl">انتظار</div></div>
-            <div class="se-stat"><div class="num">92%</div><div class="lbl">حضور</div></div>
+            <div class="se-stat"><div class="num-row"><span class="num">12</span><span class="delta pos">+3</span></div><div class="lbl">جلسات اليوم</div><div class="spark"><span style="height:40%;"></span><span style="height:55%;"></span><span style="height:35%;"></span><span style="height:70%;"></span><span style="height:90%;"></span></div></div>
+            <div class="se-stat up"><div class="num-row"><span class="num">8</span><span class="delta pos">+2</span></div><div class="lbl">مكتملة</div><div class="spark"><span style="height:30%;"></span><span style="height:50%;"></span><span style="height:45%;"></span><span style="height:75%;"></span><span style="height:95%;"></span></div></div>
+            <div class="se-stat warn"><div class="num-row"><span class="num">4</span><span class="delta neg">-1</span></div><div class="lbl">انتظار</div><div class="spark"><span style="height:80%;"></span><span style="height:60%;"></span><span style="height:65%;"></span><span style="height:40%;"></span><span style="height:30%;"></span></div></div>
+            <div class="se-stat"><div class="num-row"><span class="num">92%</span></div><div class="lbl">حضور</div><div class="spark"><span style="height:50%;"></span><span style="height:60%;"></span><span style="height:55%;"></span><span style="height:85%;"></span><span style="height:92%;"></span></div></div>
           </div>
-          <div class="se-section-title"><h3>جلسات اليوم</h3><a href="#">الكل</a></div>
+          <div class="se-section-title"><h3>جلسات اليوم</h3><a href="javascript:void(0)">الكل</a></div>
           <div class="se-table">
-            <div class="se-row"><div class="time">10:00</div><div class="info"><div class="name">سارة أحمد المصري</div><div class="sub">إصابة ركبة يمنى</div></div><span class="se-badge confirmed">مؤكدة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
-            <div class="se-row"><div class="time">11:30</div><div class="info"><div class="name">كريم عبد الله</div><div class="sub">متابعة أسبوعية</div></div><span class="se-badge pending">انتظار</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
-            <div class="se-row"><div class="time">13:15</div><div class="info"><div class="name">منى الشريف</div><div class="sub">جلسة أولى</div></div><span class="se-badge session">تقييم</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
-            <div class="se-row"><div class="time">14:00</div><div class="info"><div class="name">أشرف حلمي</div><div class="sub">علاج يدوي</div></div><span class="se-badge confirmed">مؤكدة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-table-head"><span class="th-time">الوقت</span><span class="th-info">المريض</span><span class="th-status">الحالة</span></div>
+            <div class="se-row is-live"><div class="time"><span class="tick"></span>10:00</div><div class="info"><div class="name">سارة أحمد المصري</div><div class="sub">إصابة ركبة يمنى</div></div><span class="se-badge confirmed">مؤكدة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>11:30</div><div class="info"><div class="name">كريم عبد الله</div><div class="sub">متابعة أسبوعية</div></div><span class="se-badge pending">انتظار</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>13:15</div><div class="info"><div class="name">منى الشريف</div><div class="sub">جلسة أولى</div></div><span class="se-badge session">تقييم</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>14:00</div><div class="info"><div class="name">أشرف حلمي</div><div class="sub">علاج يدوي</div></div><span class="se-badge confirmed">مؤكدة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
           </div>
           <div class="se-section-title"><h3>إجراءات سريعة</h3></div>
           <div class="se-quick">
-            <a href="#" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg><span>مريض</span></a>
-            <a href="#" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>حجز</span></a>
-            <a href="#" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg><span>تقرير</span></a>
-            <a href="#" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span>أرشيف</span></a>
+            <a href="javascript:void(0)" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg><span>مريض</span></a>
+            <a href="javascript:void(0)" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>حجز</span></a>
+            <a href="javascript:void(0)" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg><span>تقرير</span></a>
+            <a href="javascript:void(0)" class="se-quick-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span>أرشيف</span></a>
           </div>
         </div>
       </div>
         <nav class="se-bottomnav">
-          <a href="#" class="se-navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg><span>الرئيسية</span></a>
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>الجلسات</span></a>
-          <a href="#" class="se-navitem"><div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div></a>
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span>الأجنحة</span></a>
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg><span>حسابي</span></a>
+          <a href="javascript:void(0)" class="se-navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg><span>الرئيسية</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>الجلسات</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span>الأجنحة</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg><span>حسابي</span></a>
         </nav>
       </div>
     </div></div>
@@ -91,11 +97,12 @@
           </div>
         </div>
         <div class="se-tablist">
-          <button class="active">السجل</button>
-          <button>الجلسات</button>
-          <button>المرفقات</button>
+          <button class="active" data-panel="record">السجل<span class="count">3</span></button>
+          <button data-panel="sessions">الجلسات<span class="count">3</span></button>
+          <button data-panel="files">المرفقات<span class="count">2</span></button>
         </div>
         <div class="se-content" style="padding-top:14px;">
+          <div class="se-panel" data-panel="record">
           <div class="se-alert info">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
             تحسّن ملحوظ في مدى الحركة بعد 4 جلسات متتالية.
@@ -111,6 +118,22 @@
           <div class="se-log-row">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
             <div class="body"><div class="row"><span class="ttl">التقييم الأولي</span><span class="dt">10/09</span></div><p>تمزق جزئي بالرباط الجانبي، خطة 12 جلسة.</p></div>
+          </div>
+          </div>
+          <div class="se-panel" data-panel="sessions" hidden>
+          <div class="se-table">
+            <div class="se-table-head"><span class="th-time">التاريخ</span><span class="th-info">الجلسة</span><span class="th-status">الحالة</span></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>30/09</div><div class="info"><div class="name">علاج يدوي</div><div class="sub">قادمة</div></div><span class="se-badge pending">لم تبدأ</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>25/09</div><div class="info"><div class="name">علاج يدوي</div><div class="sub">منجزة</div></div><span class="se-badge confirmed">مكتملة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time"><span class="tick"></span>22/09</div><div class="info"><div class="name">تحفيز كهربائي</div><div class="sub">منجزة</div></div><span class="se-badge confirmed">مكتملة</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+          </div>
+          </div>
+          <div class="se-panel" data-panel="files" hidden>
+          <div class="se-table">
+            <div class="se-table-head"><span class="th-time">الحجم</span><span class="th-info">الملف</span><span class="th-status">التاريخ</span></div>
+            <div class="se-row"><div class="time" style="font-size:10.5px;">1.2MB</div><div class="info"><div class="name">تقرير الأشعة — ركبة يمنى.pdf</div></div><span class="se-badge session">10/09</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+            <div class="se-row"><div class="time" style="font-size:10.5px;">640KB</div><div class="info"><div class="name">خطة العلاج المقترحة.pdf</div></div><span class="se-badge session">10/09</span><div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div></div>
+          </div>
           </div>
         </div>
       </div>
@@ -182,28 +205,32 @@
           </div>
         </div>
         <div class="se-content">
-          <div class="se-stats">
-            <div class="se-stat"><div class="num">18</div><div class="lbl">مقيم</div></div>
-            <div class="se-stat warn"><div class="num">3</div><div class="lbl">خروج</div></div>
-            <div class="se-stat up"><div class="num">2</div><div class="lbl">دخول</div></div>
-            <div class="se-stat"><div class="num">5</div><div class="lbl">أسرة شاغرة</div></div>
+          <div class="se-sync-strip">
+            <span class="live-dot"></span><span>مباشر · مزامنة قبل 40 ثانية</span>
+            <span class="occupancy"><span>إشغال 90%</span><span class="bar"><span style="width:90%;"></span></span></span>
           </div>
-          <div class="se-section-title"><h3>دليل المرضى — جناح ب</h3><a href="#">تصفية</a></div>
+          <div class="se-stats">
+            <div class="se-stat"><div class="num-row"><span class="num">18</span></div><div class="lbl">مقيم</div><div class="spark"><span style="height:60%;"></span><span style="height:70%;"></span><span style="height:65%;"></span><span style="height:85%;"></span><span style="height:90%;"></span></div></div>
+            <div class="se-stat warn"><div class="num-row"><span class="num">3</span><span class="delta neg">غدًا</span></div><div class="lbl">خروج</div><div class="spark"><span style="height:40%;"></span><span style="height:55%;"></span><span style="height:35%;"></span><span style="height:60%;"></span><span style="height:50%;"></span></div></div>
+            <div class="se-stat up"><div class="num-row"><span class="num">2</span><span class="delta pos">جديد</span></div><div class="lbl">دخول</div><div class="spark"><span style="height:30%;"></span><span style="height:45%;"></span><span style="height:40%;"></span><span style="height:60%;"></span><span style="height:80%;"></span></div></div>
+            <div class="se-stat"><div class="num-row"><span class="num">5</span></div><div class="lbl">أسرة شاغرة</div><div class="spark"><span style="height:70%;"></span><span style="height:55%;"></span><span style="height:60%;"></span><span style="height:40%;"></span><span style="height:35%;"></span></div></div>
+          </div>
+          <div class="se-section-title"><h3>دليل المرضى — جناح ب</h3><a href="javascript:void(0)">تصفية</a></div>
           <div class="se-ward-table">
-            <div class="se-ward-row"><span class="bed">B-12</span><div class="info"><div class="name">أحمد فتحي راغب</div><div class="meta">اليوم 3 · كسر عظم الفخذ</div></div><span class="se-badge session">جولة</span></div>
-            <div class="se-ward-row discharge-soon"><span class="bed">B-07</span><div class="info"><div class="name">ليلى محمود حسن</div><div class="meta">اليوم 6 · جراحة ركبة</div></div><span class="se-badge pending">خروج غدًا</span></div>
-            <div class="se-ward-row"><span class="bed">B-15</span><div class="info"><div class="name">يوسف كامل عزت</div><div class="meta">اليوم 1 · إعادة تأهيل</div></div><span class="se-badge confirmed">جديد</span></div>
-            <div class="se-ward-row"><span class="bed">B-03</span><div class="info"><div class="name">هالة سيد إبراهيم</div><div class="meta">اليوم 2 · جلطة خفيفة</div></div><span class="se-badge session">جولة</span></div>
-            <div class="se-ward-row"><span class="bed">B-09</span><div class="info"><div class="name">محمود عادل شفيق</div><div class="meta">اليوم 4 · إصابة عمود فقري</div></div><span class="se-badge session">جولة</span></div>
+            <div class="se-ward-row"><span class="bed">B-12</span><div class="info"><div class="name">أحمد فتحي راغب</div><div class="meta">اليوم 3 · كسر عظم الفخذ <span class="stay-bar"><span style="width:30%;"></span></span></div></div><span class="se-badge session">جولة</span></div>
+            <div class="se-ward-row discharge-soon"><span class="bed">B-07</span><div class="info"><div class="name">ليلى محمود حسن</div><div class="meta">اليوم 6 · جراحة ركبة <span class="stay-bar"><span style="width:85%;"></span></span></div></div><span class="se-badge pending">خروج غدًا</span></div>
+            <div class="se-ward-row"><span class="bed">B-15</span><div class="info"><div class="name">يوسف كامل عزت</div><div class="meta">اليوم 1 · إعادة تأهيل <span class="stay-bar"><span style="width:10%;"></span></span></div></div><span class="se-badge confirmed">جديد</span></div>
+            <div class="se-ward-row"><span class="bed">B-03</span><div class="info"><div class="name">هالة سيد إبراهيم</div><div class="meta">اليوم 2 · جلطة خفيفة <span class="stay-bar"><span style="width:20%;"></span></span></div></div><span class="se-badge session">جولة</span></div>
+            <div class="se-ward-row"><span class="bed">B-09</span><div class="info"><div class="name">محمود عادل شفيق</div><div class="meta">اليوم 4 · إصابة عمود فقري <span class="stay-bar"><span style="width:45%;"></span></span></div></div><span class="se-badge session">جولة</span></div>
           </div>
         </div>
       </div>
         <nav class="se-bottomnav">
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg><span>الرئيسية</span></a>
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>الجلسات</span></a>
-          <a href="#" class="se-navitem"><div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div></a>
-          <a href="#" class="se-navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span>الأجنحة</span></a>
-          <a href="#" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg><span>حسابي</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg><span>الرئيسية</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>الجلسات</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div></a>
+          <a href="javascript:void(0)" class="se-navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span>الأجنحة</span></a>
+          <a href="javascript:void(0)" class="se-navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg><span>حسابي</span></a>
         </nav>
       </div>
     </div></div>
@@ -213,6 +240,7 @@
 
 <script src="../shared/navbar.js"></script>
 <script src="../shared/frame.js"></script>
+<script src="animations.js"></script>
 <script>renderShowcaseNav('structured-enterprise', false);</script>
 </body>
 </html>

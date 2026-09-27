@@ -56,7 +56,7 @@
 .sc-search input{ border:none; background:transparent; outline:none; font-family:var(--font-body); font-size:13.5px; color:var(--sc-ink); flex:1; min-width:0; }
 .sc-search input::placeholder{ color:var(--sc-muted); }
 .sc-search .mic{ width:30px; height:30px; border-radius:50%; background:var(--sc-terracotta-soft); display:flex; align-items:center; justify-content:center; color:var(--sc-terracotta); flex-shrink:0; }
-.sc-search .mic svg{ width:15px; height:15px; }
+.sc-search .mic svg{ width:15px; height:15px;}
 
 .sc-content{ padding:22px 20px 100px; flex:1; }
 
@@ -71,13 +71,13 @@
   color:var(--sc-ink-soft); cursor:pointer; transition:.2s ease;
   display:flex; align-items:center; justify-content:center; gap:6px;
 }
-.sc-segment button svg{ width:15px; height:15px; }
+.sc-segment button svg{ width:15px; height:15px;}
 .sc-segment button.active{ background:var(--sc-sage-deep); color:#fff; border-color:var(--sc-sage-deep); }
 
 .sc-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px; }
 .sc-stat{ background:var(--sc-bg); border-radius:20px; padding:16px 12px; box-shadow:0 4px 16px -8px rgba(61,50,41,.12); }
 .sc-stat .icon{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
-.sc-stat .icon svg{ width:16px; height:16px; }
+.sc-stat .icon svg{ width:16px; height:16px;}
 .sc-stat.i-sage .icon{ background:var(--sc-sage-soft); color:var(--sc-sage-deep); }
 .sc-stat.i-terracotta .icon{ background:var(--sc-terracotta-soft); color:var(--sc-terracotta); }
 .sc-stat.i-gold .icon{ background:var(--sc-gold-soft); color:var(--sc-gold); }
@@ -121,7 +121,7 @@
 .sc-btn.primary:active{ transform:scale(.98); }
 .sc-btn.secondary{ background:var(--sc-sage-soft); color:var(--sc-sage-deep); }
 .sc-btn.ghost{ background:transparent; color:var(--sc-ink-soft); border:1.5px solid var(--sc-line-strong); }
-.sc-btn svg{ width:17px; height:17px; }
+.sc-btn svg{ width:17px; height:17px;}
 
 .sc-field{ margin-bottom:16px; }
 .sc-field label{ display:block; font-size:12.5px; font-weight:700; color:var(--sc-ink); margin-bottom:7px; }
@@ -136,7 +136,7 @@
   position:absolute; inset-inline-end:10px; top:10px; width:32px; height:32px; border-radius:50%; border:none;
   background:var(--sc-terracotta-soft); color:var(--sc-terracotta); display:flex; align-items:center; justify-content:center; cursor:pointer;
 }
-.sc-field .voice-input .mic-btn svg{ width:15px; height:15px; }
+.sc-field .voice-input .mic-btn svg{ width:15px; height:15px;}
 .sc-field .voice-input textarea{ padding-inline-end:50px; }
 
 .sc-bottomnav{
@@ -162,7 +162,7 @@
 }
 .sc-profile-hero .back-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
 .sc-profile-hero .icon-btn{ width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; color:#fff; border:none; }
-.sc-profile-hero .icon-btn svg{ width:17px; height:17px; }
+.sc-profile-hero .icon-btn svg{ width:17px; height:17px;}
 .sc-profile-main{ display:flex; align-items:center; gap:14px; }
 .sc-profile-main .avatar{ width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,.2); border:2.5px solid rgba(255,255,255,.5); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:22px; }
 .sc-profile-main .name{ font-family:var(--font-display); font-weight:800; font-size:18px; }
@@ -186,7 +186,7 @@
 .sc-timeline-item::before{ content:""; position:absolute; top:28px; bottom:-4px; inset-inline-start:16px; width:1.5px; background:var(--sc-line-strong); }
 .sc-timeline-item:last-child::before{ display:none; }
 .sc-timeline-item .dot{ width:34px; height:34px; border-radius:50%; flex-shrink:0; z-index:2; background:var(--sc-sage-soft); color:var(--sc-sage-deep); display:flex; align-items:center; justify-content:center; }
-.sc-timeline-item .dot svg{ width:15px; height:15px; }
+.sc-timeline-item .dot svg{ width:15px; height:15px;}
 .sc-timeline-item .body{ flex:1; background:var(--sc-bg); border-radius:18px; padding:13px 15px; box-shadow:0 4px 14px -10px rgba(61,50,41,.15); }
 .sc-timeline-item .body .row{ display:flex; justify-content:space-between; margin-bottom:5px; }
 .sc-timeline-item .body .ttl{ font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--sc-ink); }

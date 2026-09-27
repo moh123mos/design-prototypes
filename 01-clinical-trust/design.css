@@ -86,7 +86,7 @@
   display:flex; align-items:center; justify-content:center; flex-shrink:0;
   color:var(--ct-accent-deep);
 }
-.ct-search .mic svg{ width:15px; height:15px; }
+.ct-search .mic svg{ width:15px; height:15px;}
 
 /* ---------- Content scroll area ---------- */
 .ct-content{ padding:20px 20px 100px; flex:1; }
@@ -113,7 +113,7 @@
   transition:.2s ease;
   display:flex; align-items:center; justify-content:center; gap:6px;
 }
-.ct-segment button svg{ width:15px; height:15px; }
+.ct-segment button svg{ width:15px; height:15px;}
 .ct-segment button.active{ background:var(--ct-bg); color:var(--ct-accent-deep); box-shadow:0 2px 8px -2px rgba(21,36,54,.15); }
 
 /* ---------- Stat cards ---------- */
@@ -126,7 +126,7 @@
   width:32px; height:32px; border-radius:9px;
   display:flex; align-items:center; justify-content:center; margin-bottom:10px;
 }
-.ct-stat .icon svg{ width:16px; height:16px; }
+.ct-stat .icon svg{ width:16px; height:16px;}
 .ct-stat.i-blue .icon{ background:var(--ct-accent-soft); color:var(--ct-accent-deep); }
 .ct-stat.i-mint .icon{ background:var(--ct-mint-soft); color:var(--ct-mint); }
 .ct-stat.i-gold .icon{ background:#fbf3e6; color:var(--ct-gold); }
@@ -185,7 +185,7 @@
 .ct-btn.secondary{ background:var(--ct-accent-soft); color:var(--ct-accent-deep); border:1px solid var(--ct-accent-soft-line); }
 .ct-btn.ghost{ background:transparent; color:var(--ct-ink-soft); border:1px solid var(--ct-line-strong); }
 .ct-btn.danger{ background:var(--ct-red-soft); color:var(--ct-red); }
-.ct-btn svg{ width:17px; height:17px; }
+.ct-btn svg{ width:17px; height:17px;}
 .ct-btn.sm{ padding:9px 14px; font-size:12.5px; width:auto; }
 
 /* ---------- Inputs ---------- */
@@ -207,7 +207,7 @@
   background:var(--ct-mint-soft); color:var(--ct-mint);
   display:flex; align-items:center; justify-content:center; cursor:pointer;
 }
-.ct-field .voice-input .mic-btn svg{ width:15px; height:15px; }
+.ct-field .voice-input .mic-btn svg{ width:15px; height:15px;}
 .ct-field .voice-input textarea{ padding-inline-end:48px; }
 
 /* ---------- Bottom navigation (this IS part of the app) ---------- */
@@ -239,12 +239,12 @@
   background:linear-gradient(160deg,var(--ct-accent-deep),var(--ct-accent) 75%);
   padding:20px 20px 44px; color:#fff; position:relative; flex-shrink:0;
 }
-.ct-profile-hero .back-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-.ct-profile-hero .icon-btn{
+.ct-profile-hero .back-row{ display:flex; align-items:center; justify-content:space-between; margin-block:20px; }
+.icon-btn{
   width:34px; height:34px; border-radius:10px; background:rgba(255,255,255,.16);
   display:flex; align-items:center; justify-content:center; color:#fff; border:none;
 }
-.ct-profile-hero .icon-btn svg{ width:17px; height:17px; }
+.icon-btn svg{ width:17px; height:17px; rotate: 180deg }
 .ct-profile-main{ display:flex; align-items:center; gap:14px; }
 .ct-profile-main .avatar{
   width:64px; height:64px; border-radius:18px; background:rgba(255,255,255,.18);
@@ -284,7 +284,7 @@
   background:var(--ct-accent-soft); color:var(--ct-accent-deep);
   display:flex; align-items:center; justify-content:center;
 }
-.ct-timeline-item .dot svg{ width:15px; height:15px; }
+.ct-timeline-item .dot svg{ width:15px; height:15px;}
 .ct-timeline-item .body{ flex:1; background:var(--ct-bg); border:1px solid var(--ct-line); border-radius:12px; padding:12px 14px; }
 .ct-timeline-item .body .row{ display:flex; justify-content:space-between; margin-bottom:4px; }
 .ct-timeline-item .body .ttl{ font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--ct-ink); }

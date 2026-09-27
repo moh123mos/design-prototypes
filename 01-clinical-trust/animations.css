@@ -1,0 +1,129 @@
+/* ==========================================================
+   CLINICAL TRUST — Motion layer
+   Experimental animation pass (screen 1 of 5 designs). Adds:
+   1. Staggered load-in reveal for each screen's content
+   2. Tap/press feedback on interactive elements
+   3. Sliding thumb for the segment toggle
+   4. Bottom-nav active state + FAB idle pulse
+   5. Subtle "live" pulse on status badges
+   6. Topbar shrink/blur on scroll
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ---------- 1. Staggered load-in ---------- */
+/* Each direct animatable child of a freshly-loaded screen fades + rises
+   into place in sequence. .ct-reveal is applied by animations.js to the
+   elements we want staggered (topbar, segment, stat row, each card, etc). */
+@keyframes ct-rise-in{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.ct-reveal{
+  opacity:0;
+  animation:ct-rise-in .5s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay:var(--ct-delay, 0ms);
+}
+
+/* ---------- 2. Tap / press feedback ---------- */
+.ct-card,
+.ct-ward-card,
+.ct-quick-item .ic,
+.ct-stat,
+.ct-btn,
+.ct-segment button,
+.ct-tablist button,
+.icon-btn,
+.ct-navitem{
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.ct-card:active,
+.ct-ward-card:active{ transform:scale(.98); }
+.ct-quick-item:active .ic{ transform:scale(.9); }
+.ct-stat:active{ transform:scale(.96); }
+.ct-btn:active{ transform:scale(.97); }
+.icon-btn:active{ transform:scale(.9); }
+.ct-navitem:active{ transform:scale(.92); }
+.ct-navitem:active .fab{ transform:scale(.94); }
+
+/* ---------- 3. Sliding thumb for segment toggle ---------- */
+.ct-segment{ position:relative; }
+.ct-segment .ct-segment-thumb{
+  position:absolute;
+  top:5px; bottom:5px;
+  width:calc(50% - 8px);
+  background:var(--ct-bg);
+  border-radius:9px;
+  box-shadow:0 2px 8px -2px rgba(21,36,54,.15);
+  transition:transform .32s cubic-bezier(.65,0,.35,1);
+  z-index:0;
+  pointer-events:none;
+}
+.ct-segment button{ position:relative; z-index:1; }
+.ct-segment button.active{ background:transparent; box-shadow:none; }
+
+/* ---------- 3b. Patient-profile tabs — real panel swap ---------- */
+@keyframes ct-panel-in{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.ct-panel.is-swapping{ animation:ct-panel-in .32s cubic-bezier(.22,1,.36,1); }
+
+/* ---------- 4. Bottom nav active feel + FAB idle pulse ---------- */
+.ct-navitem svg{ transition:transform .25s cubic-bezier(.34,1.56,.64,1); }
+.ct-navitem.active svg{ transform:translateY(-1px) scale(1.08); }
+
+.ct-navitem .fab{ position:relative; }
+.ct-navitem .fab::after{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:inherit;
+  border:2px solid var(--ct-accent);
+  opacity:.5;
+  animation:ct-fab-pulse 2.4s ease-out infinite;
+}
+@keyframes ct-fab-pulse{
+  0%{ transform:scale(.85); opacity:.55; }
+  70%{ transform:scale(1.35); opacity:0; }
+  100%{ opacity:0; }
+}
+
+/* ---------- 5. Subtle "live" pulse on badges ---------- */
+.ct-badge.confirmed::before,
+.ct-badge.pending::before,
+.ct-badge.session::before{
+  content:"";
+  display:inline-block;
+  width:5px; height:5px; border-radius:50%;
+  background:currentColor;
+  margin-inline-end:2px;
+  animation:ct-badge-pulse 1.8s ease-in-out infinite;
+}
+@keyframes ct-badge-pulse{
+  0%, 100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.45; transform:scale(.75); }
+}
+
+/* ---------- 6. Topbar shrink/blur on scroll ---------- */
+.ct-topbar{
+  transition:padding .25s ease, box-shadow .25s ease;
+}
+.ct-topbar.is-condensed{
+  padding-top:4px;
+  padding-bottom:10px;
+  box-shadow:0 6px 16px -12px rgba(21,36,54,.25);
+}
+.ct-topbar.is-condensed .ct-topbar-row{ margin-bottom:8px; }
+.ct-topbar.is-condensed .greeting{ font-size:16px; }
+.ct-topbar.is-condensed .ct-avatar{ width:34px; height:34px; font-size:13px; }
+
+/* Same condensed treatment for the profile hero's tab bar / stat card
+   shadow when the timeline underneath is mid-scroll. */
+.ct-profile-hero{ transition:padding .25s ease; }
