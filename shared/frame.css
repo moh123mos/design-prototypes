@@ -1,0 +1,208 @@
+/* ============================================================
+   Shared "showcase chrome" — NOT part of the app itself.
+   This provides: the top navbar (design switcher) and the
+   mobile device frame that the actual app UI sits inside.
+   ============================================================ */
+
+/* Default (index/landing) showcase palette — dark neutral.
+   Individual design pages override these variables (see each
+   design.css's ".showcase-body" block) so the surrounding chrome
+   picks up that design's own identity instead of a fixed dark theme. */
+:root{
+  --showcase-bg:#f5f6f8;
+  --showcase-ink:#1a1f29;
+  --showcase-muted:#6b7280;
+  --showcase-line:#e2e5ea;
+  --showcase-accent:#4f8cff;
+  --showcase-nav-bg:rgba(255,255,255,.88);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{ margin:0; padding:0; }
+
+body.showcase-body{
+  background:var(--showcase-bg);
+  color:var(--showcase-ink);
+  font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+  min-height:100vh;
+}
+
+/* ---------- Top navbar (showcase only) ---------- */
+.showcase-nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 20px;
+  background:var(--showcase-nav-bg);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--showcase-line);
+  flex-wrap:nowrap;
+}
+.showcase-nav .brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  font-size:13.5px;
+  color:var(--showcase-ink);
+  text-decoration:none;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.showcase-nav .brand .brand-text{ display:inline; }
+.showcase-nav .brand .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--showcase-accent);
+  box-shadow:0 0 0 4px var(--showcase-accent-soft, rgba(79,140,255,.18));
+  flex-shrink:0;
+}
+.showcase-tabs{
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  flex:1;
+  justify-content:center;
+  min-width:0;
+}
+.showcase-tabs::-webkit-scrollbar{ display:none; }
+.showcase-tabs a{
+  flex-shrink:0;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--showcase-muted);
+  text-decoration:none;
+  border:1px solid transparent;
+  transition:.15s ease;
+  white-space:nowrap;
+}
+.showcase-tabs a:hover{
+  color:var(--showcase-ink);
+  background:var(--showcase-tab-hover, rgba(0,0,0,.04));
+}
+.showcase-tabs a.active{
+  color:var(--showcase-accent-ink, var(--showcase-accent));
+  background:var(--showcase-accent-soft, rgba(79,140,255,.14));
+  border-color:var(--showcase-accent-line, rgba(79,140,255,.4));
+  font-weight:700;
+}
+
+/* ---------- Phone frame gallery ---------- */
+.phone-gallery{
+  max-width:1200px;
+  margin:0 auto;
+  padding:28px 24px 40px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:32px;
+  justify-content:center;
+}
+.phone-slot{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.phone-slot .screen-label{
+  font-family:"JetBrains Mono",monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  color:var(--showcase-muted);
+  text-transform:uppercase;
+}
+
+.phone-frame{
+  width:375px;
+  height:812px;
+  background:#000;
+  border-radius:46px;
+  padding:12px;
+  box-shadow:
+    0 0 0 2px #1c1f26,
+    0 30px 60px -20px rgba(0,0,0,.6),
+    0 10px 24px -8px rgba(0,0,0,.5);
+  position:relative;
+  flex-shrink:0;
+}
+/* Design pages only: cap the frame height to the viewport height below
+   the navbar, so a full screen is visible without scrolling the page.
+   Width is unaffected — only height shrinks on short viewports, exactly
+   like a real device frame would if you shortened its screen. */
+html.design-page .phone-frame{
+  height:min(812px, calc(100vh - var(--nav-h, 57px) - 56px));
+}
+.phone-frame .notch{
+  position:absolute;
+  top:12px; left:50%;
+  transform:translateX(-50%);
+  width:114px; height:32px;
+  background:#000;
+  border-radius:20px;
+  z-index:50;
+  pointer-events:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset;
+}
+.phone-screen{
+  width:100%;
+  height:100%;
+  background:#fff;
+  border-radius:34px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  isolation:isolate;
+}
+/* .app-shell fills the phone screen and splits into a scrolling viewport
+   plus fixed chrome (bottom nav / action bar) that never scrolls away.
+   It also carries the dir="rtl"/"ltr" attribute toggled by frame.js, so
+   both the scrollable content and the fixed bottom chrome flip together. */
+.app-shell{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+
+/* The scrollable app body — sits between the status bar and the bottom nav,
+   both of which are fixed chrome siblings so they never scroll away. */
+.app-viewport{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:none;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+.app-viewport::-webkit-scrollbar{ display:none; }
+
+/* Bottom nav bars declare themselves as fixed chrome via this class instead
+   of relying on flex order, so they stay pinned regardless of scroll. */
+[class*="bottomnav"]{
+  flex-shrink:0;
+  position:relative;
+  z-index:40;
+}
+
+/* ---------- Navbar responsiveness ---------- */
+@media (max-width:900px){
+  .showcase-nav{ padding:9px 14px; gap:8px; }
+  .showcase-nav .brand .brand-text{ display:none; }
+  .showcase-tabs{ justify-content:flex-start; }
+  .showcase-tabs a{ padding:6px 10px; font-size:11.5px; }
+}
+
+@media (max-width:480px){
+  .showcase-nav{ padding:8px 10px; gap:6px; }
+  .showcase-tabs a{ padding:5px 9px; font-size:11px; }
+
+  .phone-frame{ width:320px; border-radius:38px; }
+  html.design-page .phone-frame{ height:min(692px, calc(100vh - var(--nav-h, 50px) - 56px)); }
+  .phone-frame .notch{ top:10px; width:100px; height:28px; border-radius:18px; }
+  .phone-screen{ border-radius:28px; }
+}
