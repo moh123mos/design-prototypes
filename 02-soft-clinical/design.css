@@ -55,7 +55,7 @@
 .sc-search svg{ width:18px; height:18px; color:var(--sc-muted); flex-shrink:0; }
 .sc-search input{ border:none; background:transparent; outline:none; font-family:var(--font-body); font-size:13.5px; color:var(--sc-ink); flex:1; min-width:0; }
 .sc-search input::placeholder{ color:var(--sc-muted); }
-.sc-search .mic{ width:30px; height:30px; border-radius:50%; background:var(--sc-terracotta-soft); display:flex; align-items:center; justify-content:center; color:var(--sc-terracotta); flex-shrink:0; }
+.sc-search .mic{ width:30px; height:30px; border-radius:50%; background:var(--sc-terracotta-soft); border:none; padding:0; display:flex; align-items:center; justify-content:center; color:var(--sc-terracotta); flex-shrink:0; cursor:pointer; }
 .sc-search .mic svg{ width:15px; height:15px;}
 
 .sc-content{ padding:22px 20px 100px; flex:1; }

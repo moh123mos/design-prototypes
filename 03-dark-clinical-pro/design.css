@@ -52,7 +52,7 @@
 .dp-search svg{ width:18px; height:18px; color:var(--dp-muted); flex-shrink:0; }
 .dp-search input{ border:none; background:transparent; outline:none; font-family:var(--font-body); font-size:13.5px; color:var(--dp-ink); flex:1; min-width:0; }
 .dp-search input::placeholder{ color:var(--dp-muted); }
-.dp-search .mic{ width:30px; height:30px; border-radius:9px; background:var(--dp-mint-soft); display:flex; align-items:center; justify-content:center; color:var(--dp-mint); flex-shrink:0; }
+.dp-search .mic{ width:30px; height:30px; border-radius:9px; background:var(--dp-mint-soft); border:none; padding:0; display:flex; align-items:center; justify-content:center; color:var(--dp-mint); flex-shrink:0; cursor:pointer; }
 .dp-search .mic svg{ width:15px; height:15px;}
 
 .dp-content{ padding:20px 20px 100px; flex:1; }
